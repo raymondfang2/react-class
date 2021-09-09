@@ -3,6 +3,7 @@ import {Fragment, Component} from 'react';
 import Users from './Users';
 import classes from './UserFinder.module.css'
 import UsersContext from "../context/users-context";
+import ErrorBoundary from "./ErrorBoundary";
 
 // const DUMMY_USERS = [
 //     { id: "u1", name: "Max" },
@@ -26,6 +27,7 @@ class UserFinder extends Component {
    //      };
    //  }
 
+
     searchChangeHandler = (event) => {
         this.setState({
             searchTerm: event.target.value,
@@ -38,7 +40,9 @@ class UserFinder extends Component {
         return (
             <div className={classes.finder}>
                 <input className={classes.finder} type='search' onChange={this.searchChangeHandler.bind(this)} />
-                <Users users={this.state.filteredUsers} />
+                <ErrorBoundary>
+                    <Users users={this.state.filteredUsers} />
+                </ErrorBoundary>
             </div>
         );
     }

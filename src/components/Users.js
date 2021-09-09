@@ -13,6 +13,12 @@ class Users extends Component {
     };
   }
 
+  componentDidUpdate() {
+    if (this.props.users.length===0) {
+      throw new Error("Empty Users Error!");
+    }
+  }
+
   toggleUsersHandle = () => {
     this.setState((prevState) => {
       return { showUsers: !prevState.showUsers };
